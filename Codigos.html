@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    
+    <title>Codigos</title>
+</head>
+<body>
+    <nav>
+        <a href="#colas">Colas</a>
+        <a href="#listas">Listas</a>
+        <a href="#arboles">Árboles</a>
+        <a href="#grafos">Grafos</a>
+        <a href="#pilas">Pilas</a>
+        <a href="index.html">Volver</a>
+      </nav>
+    
+      <div class="content">
+    
+        <section id="colas" class="section">
+          <h2>Colas</h2>
+          <div class="code">
+            <pre>
+                #include <iostream>
+                #include <queue>
+                        
+                    int main() {
+                    std::queue<int> miCola;
+                        
+                    miCola.push(10);
+                    miCola.push(20);
+                    miCola.push(30);
+                    miCola.push(40);
+                        
+                    std::cout << "Tamaño de la cola: " << miCola.size() << std::endl;
+                        
+                    std::cout << "Elemento frontal de la cola: " << miCola.front() << std::endl;
+                        
+                    miCola.pop();
+                        
+                    std::cout << "Tamaño de la cola después de pop: " << miCola.size() << std::endl;
+                        
+                    std::cout << "Elementos en la cola: ";
+                    while (!miCola.empty()) {
+                    std::cout << miCola.front() << " ";
+                    miCola.pop();
+                    }
+                    std::cout << std::endl;
+                        
+                    return 0;
+                }
+                        
+                </pre>
+          </div>
+        </section>
+    
+        <section id="listas" class="section">
+          <h2>Listas</h2>
+          <div class="code">
+            <pre>
+              #include <iostream>
+
+                struct Nodo {
+                    int dato;
+                    Nodo* siguiente;
+                
+                    Nodo(int valor) : dato(valor), siguiente(0) {}
+                };
+                
+                int main() {
+                    Nodo* primero = new Nodo(10);
+                    Nodo* segundo = new Nodo(20);
+                    Nodo* tercero = new Nodo(30);
+                
+                    primero->siguiente = segundo;
+                    segundo->siguiente = tercero;
+                
+                    Nodo* actual = primero;
+                    while (actual != 0) {
+                        std::cout << actual->dato << " ";
+                        actual = actual->siguiente;
+                    }
+                    std::cout << std::endl;
+
+                    return 0;
+                }
+                
+            </pre>
+          </div>
+        </section>
+    
+        <section id="arboles" class "section">
+          <h2>Árboles</h2>
+          <div class="code">
+            <pre>
+              #include <iostream>
+
+                struct NodoArbol {
+                    int valor;
+                    NodoArbol* izquierdo;
+                    NodoArbol* derecho;
+                
+                    NodoArbol(int dato) : valor(dato), izquierdo(0), derecho(0) {}
+                };
+                
+                void inOrderTraversal(NodoArbol* nodo) {
+                    if (nodo != 0) {
+                        inOrderTraversal(nodo->izquierdo);
+                        std::cout << nodo->valor << " ";
+                        inOrderTraversal(nodo->derecho);
+                    }
+                }
+                
+                int main() {
+                    NodoArbol* raiz = new NodoArbol(10);
+                    raiz->izquierdo = new NodoArbol(5);
+                    raiz->derecho = new NodoArbol(15);
+                    raiz->izquierdo->izquierdo = new NodoArbol(3);
+                    raiz->izquierdo->derecho = new NodoArbol(7);
+
+                    std::cout << "Recorrido en orden del arbol: ";
+                    inOrderTraversal(raiz);
+                    std::cout << std::endl;
+  
+                    return 0;
+                }
+            </pre>
+          </div>
+        </section>
+    
+        <section id="grafos" class="section">
+          <h2>Grafos</h2>
+          <div class="code">
+            <pre>
+              #include <iostream>
+                #include <vector>
+                
+                class GrafoNoDirigido {
+                private:
+                    int numVertices;
+                    std::vector<std::vector<int> > matrizAdyacencia;
+                
+                public:
+                    GrafoNoDirigido(int n) : numVertices(n) {
+                        matrizAdyacencia.resize(n, std::vector<int>(n, 0));
+                    }
+                
+                    void agregarArista(int origen, int destino) {
+                        matrizAdyacencia[origen][destino] = 1;
+                        matrizAdyacencia[destino][origen] = 1; 
+                    }
+                
+                    void mostrarGrafo() {
+                        for (int i = 0; i < numVertices; ++i) {
+                            for (int j = 0; j < numVertices; ++j) {
+                                std::cout << matrizAdyacencia[i][j] << " ";
+                            }
+                            std::cout << std::endl;
+                        }
+                    }
+                };
+                
+                int main() {
+                    GrafoNoDirigido grafo(5);
+                
+                    grafo.agregarArista(0, 1);
+                    grafo.agregarArista(0, 2);
+                    grafo.agregarArista(1, 3);
+                    grafo.agregarArista(2, 4);
+                
+                    std::cout << "Matriz de adyacencia del grafo:" << std::endl;
+                    grafo.mostrarGrafo();
+                
+                    return 0;
+                }
+                
+            </pre>
+          </div>
+        </section>
+    
+        <section id="pilas" class="section">
+          <h2>Pilas</h2>
+            <div class="code">
+        <pre>
+        #include <iostream>
+        #include <stack>
+                                    
+            int main() {
+                                
+            std::stack<int> pila;
+                                    
+            pila.push(10);
+            pila.push(20);
+            pila.push(30);
+            pila.push(40);
+                                        
+            std::cout << "Elemento en la cima de la pila: " << pila.top() << std::endl;
+                                    
+            pila.pop();
+                                    
+            std::cout << "Elemento en la cima de la pila después de la eliminación: " << pila.top() << std::endl;
+                    
+            if (pila.empty()) {
+            std::cout << "La pila está vacía." << std::endl;
+            } else {
+            std::cout << "La pila no está vacía." << std::endl;
+            }
+                                    
+            std::cout << "Tamaño de la pila: " << pila.size() << std::endl;
+                                    
+            return 0;
+        }
+        </pre>        
+            </div>
+            </section>
+   
+</body>
+</html>
